@@ -26,21 +26,22 @@ class Recipe {
         article.classList.add('recipe-card');
         article.setAttribute('data-recipe-id', this.id);
 
-        // Construction de la liste d'ingrédients
+        // Construction of the ingredients list HTML
         let ingredientsHTML = '';
         this.ingredients.forEach(ing => {
-            let ingredientText = `<li><strong>${ing.ingredient}</strong>`;
-            if (ing.quantity) {
-                ingredientText += ` <br>${ing.quantity}`;
-                if (ing.unit) {
-                    ingredientText += ` ${ing.unit}`;
-                }
-            }
-            ingredientText += '</li>';
-            ingredientsHTML += ingredientText;
+            ingredientsHTML += `
+            <li>
+                <span class="ingredient-name">${ing.ingredient}</span>
+                ${ing.quantity ? `
+                    <span class="ingredient-quantity">
+                        ${ing.quantity} ${ing.unit || ''}
+                    </span>
+                ` : ''}
+            </li>
+        `;
         });
 
-        // Construction de la carte complète
+        // Creation of the recipe card HTML
         article.innerHTML = `
             <div class="recipe-img">
                 <img src="${this.image}" alt="${this.name}" />

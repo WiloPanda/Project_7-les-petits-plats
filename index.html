@@ -26,7 +26,7 @@
         <div class="container-fluid  img-bg">
             <div class="h-100">
                 <div class="p-5">
-                    <img src="assets/logo/Les petits plats.svg" alt="Logo Les petits plats" class="logo">
+                    <img src="assets/logo/Les_petits_plats.svg" alt="Logo Les petits plats" class="logo">
                     <img src="assets/logo/assiette.svg" alt="Logo les petits plats" class="logo-assiette">
                 </div>
                 <div class="text-center quote">
@@ -36,8 +36,8 @@
                 <div class="navbar-container row justify-content-center mt-3">
                     <nav class="navbar bg-body">
                         <div class="container-fluid">
-                            <form class="d-flex" role="search">
-                                <input class="form-control" type="search"
+                            <form class="d-flex search-form" role="search">
+                                <input class="search-input" type="search"
                                     placeholder="Recherchez une recette, un ingrédient, ..." aria-label="Search">
                                 <button type="submit"><i class="fas fa-thin fa-search"></i></button>
                             </form>
@@ -57,23 +57,23 @@
 
                 <div class="dropdown-content" id="ingredients-dropdown">
                     <div class="search-container">
-                        <input type="text" class="search-input" id="ingredients-search"
-                            placeholder="Rechercher un ingrédient">
+                        <input type="search" class="search-input-filter" id="ingredients-search">
                         <span class="search-icon">
-
-                        </span>
-                        <span class="clear-search" id="ingredients-clear">
+                            <i class="fas fa-thin fa-search"></i>
                         </span>
                     </div>
 
-                    <ul class="ingredients-list" id="ingredients-list">
-                        <!-- Ingredients will be populated here via JavaScript -->
+                    <ul class="filtre-list" id="ingredients-list">
+
                     </ul>
                 </div>
+
+                <div class="selected-tags" id="selected-ingredient-container"></div>
+
             </div>
 
-            <!-- Selected ingredients tags will appear here -->
-            <div class="selected-tags" id="selected-ingredients-container"></div>
+
+
 
             <div class="filter-box appareils-filter">
                 <button class="filter-button" id="appareils-button" aria-haspopup="true" aria-expanded="false">
@@ -83,24 +83,21 @@
 
                 <div class="dropdown-content" id="appareils-dropdown">
                     <div class="search-container">
-                        <input type="text" class="search-input" id="appareils-search"
-                            placeholder="Rechercher un appareil">
+                        <input type="search" class="search-input-filter" id="appareils-search">
                         <span class="search-icon">
-
-                        </span>
-                        <span class="clear-search" id="appareils-clear">
-
+                            <i class="fas fa-thin fa-search"></i>
                         </span>
                     </div>
 
-                    <ul class="appareils-list" id="appareils-list">
-                        <!-- Appareils will be populated here via JavaScript -->
+                    <ul class="filtre-list" id="appareils-list">
+
                     </ul>
                 </div>
+
+                <div class="selected-tags" id="selected-appliance-container"></div>
+
             </div>
 
-            <!-- Selected appareils tags will appear here -->
-            <div class="selected-tags" id="selected-appareils-container"></div>
 
 
             <div class="filter-box ustensiles-filter">
@@ -111,24 +108,22 @@
 
                 <div class="dropdown-content" id="ustensiles-dropdown">
                     <div class="search-container">
-                        <input type="text" class="search-input" id="ustensiles-search"
-                            placeholder="Rechercher un ustensile">
+                        <input type="search" class="search-input-filter" id="ustensiles-search">
                         <span class="search-icon">
-
-                        </span>
-                        <span class="clear-search" id="ustensiles-clear">
-
+                            <i class="fas fa-thin fa-search"></i>
                         </span>
                     </div>
 
-                    <ul class="ustensiles-list" id="ustensiles-list">
-                        <!-- Ustensiles will be populated here via JavaScript -->
+                    <ul class="filtre-list" id="ustensiles-list">
+
                     </ul>
                 </div>
+
+                <div class="selected-tags" id="selected-ustensils-container"></div>
+
             </div>
 
-            <!-- Selected ustensiles tags will appear here -->
-            <div class="selected-tags" id="selected-ustensiles-container"></div>
+
         </div>
 
         <div class="recipes-container">
