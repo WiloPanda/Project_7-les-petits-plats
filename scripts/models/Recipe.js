@@ -7,7 +7,7 @@ class Recipe {
     constructor(recipeData) {
         const { id, image, name, servings, ingredients, time, description, appliance, ustensils } = recipeData;
         this.id = id;
-        this.image = `../../assets/images_recipes/${image}`;
+        this.image = `assets/images_recipes/${image}`;
         this.name = name;
         this.servings = servings;
         this.ingredients = ingredients;

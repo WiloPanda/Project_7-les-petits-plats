@@ -70,7 +70,7 @@ input:focus {
     -webkit-appearance: none;
     height: 16px;
     width: 16px;
-    background: url('/assets/close.svg') no-repeat center center;
+    background: url('../assets/close.svg') no-repeat center center;
     background-size: contain;
     cursor: pointer;
     margin-right: 20px;
@@ -167,12 +167,11 @@ button i {
     margin-right: 5px;
 }
 
-
 .search-container .search-input-filter::-webkit-search-cancel-button {
     -webkit-appearance: none;
     height: 8px;
     width: 8px;
-    background: url('/assets/close.svg') no-repeat center center;
+    background: url('../assets/close.svg') no-repeat center center;
     background-size: contain;
     cursor: pointer;
 }

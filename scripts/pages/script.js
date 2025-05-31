@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tag.setAttribute('data-value', value);
         tag.innerHTML = `
             ${value}
-            <img src="/assets/close_tag.svg" class="remove-tag" alt="Supprimer ${value}">
+            <img src="./assets/close_tag.svg" class="remove-tag" alt="Supprimer ${value}">
         `;
 
         // Ajouter l'événement pour supprimer le tag
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
             arraySearch = []; // Réinitialiser le tableau à chaque appel
 
             // Ajouter la valeur de la barre de recherche si elle existe
-            if (searchInput.value.length > 0) {
+            if (searchInput.value.length > 2) {
                 let searchValue = searchInput.value.toLowerCase();
                 arraySearch.push(["searchBar", searchValue]);
             }
