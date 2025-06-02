@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function init() {
         const recipesData = await getData();
         initVisuel(recipesData);
+        filterDropdown();
     }
 
     init();
@@ -27,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function initVisuel(Data) {
         displayRecipes(Data);
-        filterDropdown();
         displayFilters('ingredient', Data);
         displayFilters('ustensils', Data);
         displayFilters('appliance', Data);
