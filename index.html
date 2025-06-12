@@ -48,82 +48,88 @@
         </div>
     </header>
     <main>
-        <div class="filters-container">
-            <div class="filter-box ingredients-filter">
-                <button class="filter-button" id="ingredients-button" aria-haspopup="true" aria-expanded="false">
-                    Ingrédients
-                    <img src="./assets/arrow.svg" alt="Fleche vers le bas" class="dropdown-arrow">
-                </button>
+        <div class="top-page">
+            <div class="filters-container">
+                <div class="filter-box ingredients-filter">
+                    <button class="filter-button" id="ingredients-button" aria-haspopup="true" aria-expanded="false">
+                        Ingrédients
+                        <img src="./assets/arrow.svg" alt="Fleche vers le bas" class="dropdown-arrow">
+                    </button>
 
-                <div class="dropdown-content" id="ingredients-dropdown">
-                    <div class="search-container">
-                        <input type="search" class="search-input-filter" id="ingredients-search">
-                        <span class="search-icon">
-                            <i class="fas fa-thin fa-search"></i>
-                        </span>
+                    <div class="dropdown-content" id="ingredients-dropdown">
+                        <div class="search-container">
+                            <input type="search" class="search-input-filter" id="ingredients-search">
+                            <span class="search-icon">
+                                <i class="fas fa-thin fa-search"></i>
+                            </span>
+                        </div>
+
+                        <ul class="filtre-list" id="ingredients-list">
+
+                        </ul>
                     </div>
 
-                    <ul class="filtre-list" id="ingredients-list">
+                    <div class="selected-tags" id="selected-ingredient-container"></div>
 
-                    </ul>
                 </div>
 
-                <div class="selected-tags" id="selected-ingredient-container"></div>
+
+
+
+                <div class="filter-box appareils-filter">
+                    <button class="filter-button" id="appareils-button" aria-haspopup="true" aria-expanded="false">
+                        Appareils
+                        <img src="./assets/arrow.svg" alt="Fleche vers le bas" class="dropdown-arrow">
+                    </button>
+
+                    <div class="dropdown-content" id="appareils-dropdown">
+                        <div class="search-container">
+                            <input type="search" class="search-input-filter" id="appliances-search">
+                            <span class="search-icon">
+                                <i class="fas fa-thin fa-search"></i>
+                            </span>
+                        </div>
+
+                        <ul class="filtre-list" id="appareils-list">
+
+                        </ul>
+                    </div>
+
+                    <div class="selected-tags" id="selected-appliance-container"></div>
+
+                </div>
+
+
+
+                <div class="filter-box ustensiles-filter">
+                    <button class="filter-button" id="ustensiles-button" aria-haspopup="true" aria-expanded="false">
+                        Ustensiles
+                        <img src="./assets/arrow.svg" alt="Fleche vers le bas" class="dropdown-arrow">
+                    </button>
+
+                    <div class="dropdown-content" id="ustensiles-dropdown">
+                        <div class="search-container">
+                            <input type="search" class="search-input-filter" id="ustensils-search">
+                            <span class="search-icon">
+                                <i class="fas fa-thin fa-search"></i>
+                            </span>
+                        </div>
+
+                        <ul class="filtre-list" id="ustensiles-list">
+
+                        </ul>
+                    </div>
+
+                    <div class="selected-tags" id="selected-ustensils-container"></div>
+
+                </div>
+
 
             </div>
 
-
-
-
-            <div class="filter-box appareils-filter">
-                <button class="filter-button" id="appareils-button" aria-haspopup="true" aria-expanded="false">
-                    Appareils
-                    <img src="./assets/arrow.svg" alt="Fleche vers le bas" class="dropdown-arrow">
-                </button>
-
-                <div class="dropdown-content" id="appareils-dropdown">
-                    <div class="search-container">
-                        <input type="search" class="search-input-filter" id="appliances-search">
-                        <span class="search-icon">
-                            <i class="fas fa-thin fa-search"></i>
-                        </span>
-                    </div>
-
-                    <ul class="filtre-list" id="appareils-list">
-
-                    </ul>
-                </div>
-
-                <div class="selected-tags" id="selected-appliance-container"></div>
+            <div class="recipe-counter">
 
             </div>
-
-
-
-            <div class="filter-box ustensiles-filter">
-                <button class="filter-button" id="ustensiles-button" aria-haspopup="true" aria-expanded="false">
-                    Ustensiles
-                    <img src="./assets/arrow.svg" alt="Fleche vers le bas" class="dropdown-arrow">
-                </button>
-
-                <div class="dropdown-content" id="ustensiles-dropdown">
-                    <div class="search-container">
-                        <input type="search" class="search-input-filter" id="ustensils-search">
-                        <span class="search-icon">
-                            <i class="fas fa-thin fa-search"></i>
-                        </span>
-                    </div>
-
-                    <ul class="filtre-list" id="ustensiles-list">
-
-                    </ul>
-                </div>
-
-                <div class="selected-tags" id="selected-ustensils-container"></div>
-
-            </div>
-
-
         </div>
 
         <div class="recipes-container">
