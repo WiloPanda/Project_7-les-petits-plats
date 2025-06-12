@@ -34,6 +34,22 @@ document.addEventListener("DOMContentLoaded", function () {
         displayFilters('appliance', availableFilters.appliance);
     }
 
+    function updateRecipeCounter() {
+        const recipesSection = document.querySelector('.recipes-container');
+        const recipeCards = recipesSection.querySelectorAll('.recipe-card');
+
+        const visibleCount = Array.from(recipeCards)
+            .filter(card => card.style.display !== 'none')
+            .length;
+
+        const counterElement = document.querySelector('.recipe-counter');
+
+        // Convertir visibleCount en chaîne et ajouter un 0 devant si moins de 10
+        const formattedCount = visibleCount.toString().padStart(2, '0');
+
+        counterElement.textContent = `${formattedCount} recette${visibleCount > 1 ? 's' : ''}`;
+    }
+
     /**
      * Display recipes data on the page.
      * @function [<displayRecipes>]
@@ -48,6 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const recipeCard = recipe.createRecipeCard();
             recipesContainer.appendChild(recipeCard);
         });
+
+        updateRecipeCounter();
     };
 
     function getAllFiltersFromRecipes(recipes) {
