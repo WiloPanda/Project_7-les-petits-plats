@@ -104,6 +104,12 @@ button i {
     padding: 20px 0px;
 }
 
+.top-page {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .filter-button {
     display: flex;
     align-items: center;
@@ -222,9 +228,11 @@ button i {
 }
 
 /*** CARD RECIPES ***/
-.recipe-count {
-    font-size: 24px;
-    font-weight: bold;
+.recipe-counter {
+    font-weight: 400;
+    font-size: 21px;
+    color: #1B1B1B;
+    font-family: Anton;
 }
 
 .recipes-container {
