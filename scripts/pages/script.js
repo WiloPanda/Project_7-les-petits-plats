@@ -27,6 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return Promise.resolve(recipes);
     }
 
+    /**
+     * Initialize the visual part of the page with recipes and filters.
+     * @function [<initVisuel>]
+     * @param {object} data - Data of the recipes.
+     */
     function initVisuel(data) {
         displayRecipes(data);
         const availableFilters = getAllFiltersFromRecipes(data);
@@ -35,6 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
         displayFilters('appliance', availableFilters.appliance);
     }
 
+    /**
+     * Update the recipe counter displayed on the page.
+     * @function [<updateRecipeCounter>]
+     */
     function updateRecipeCounter() {
         const recipesSection = document.querySelector('.recipes-container');
         const recipeCards = recipesSection.querySelectorAll('.recipe-card');
@@ -67,6 +76,11 @@ document.addEventListener("DOMContentLoaded", function () {
         updateRecipeCounter();
     };
 
+    /**
+     * Get all filters from the recipes data.
+     * @function [<getAllFiltersFromRecipes>]
+     * @param {Objet} recipes - Recipes data
+     */
     function getAllFiltersFromRecipes(recipes) {
         const ingredientsSet = new Set();
         const ustensilsSet = new Set();
@@ -153,7 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
             <img src="./assets/close_tag.svg" class="remove-tag" alt="Supprimer ${value}">
         `;
 
-        // Ajouter l'événement pour supprimer le tag
         const removeButton = tag.querySelector('.remove-tag');
         removeButton.addEventListener('click', () => {
             removeSelectedTag(filterType, value);
@@ -196,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /**
-     * Search function to filter recipes based on user input in the search bar.
+     * Search function for the filters search bars.
      * @function [<searchFilterButton>]
      */
     const searchFilterButton = (function () {
@@ -226,10 +239,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             if (arraySearchFilter.length > 0) {
-                // Rechercher dynamiquement dans les listes de filtres
+
                 filterArrayFilter();
             } else {
-                // Si aucun champ n’a 3 caractères, alors on réaffiche les filtres disponibles selon les recettes filtrées
+                // If no search input is provided, display all available filters
                 const filteredRecipes = getFilteredRecipes();
                 const updatedFilters = getAllFiltersFromRecipes(filteredRecipes);
                 displayFilters('ingredient', updatedFilters.ingredients);
@@ -252,6 +265,11 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     })();
 
+
+    /** 
+     * Get the filtered recipes based on the selected filters.
+     ** @function [<getFilteredRecipes>]
+     */
     function getFilteredRecipes() {
         const allFilters = searchInstance.getArraySearch();
         return recipes.filter(recipe => {
@@ -298,15 +316,18 @@ document.addEventListener("DOMContentLoaded", function () {
                         break;
                 }
             });
-
             return matchesAllCriteria;
         });
     }
 
+    /**
+     * Filter the recipes based on the search input and selected tags.
+     * @function [<filterArrayFilter>]
+     */
     function filterArrayFilter() {
         const filterSearch = searchFilterButton.getArraySearch();
 
-        // Récupère les recettes filtrées selon les tags actifs (mais sans la recherche principale)
+        // Take the filtered recipes based on selected tags
         const selectedIngredients = Array.from(document.querySelectorAll('#selected-ingredient-container .selected-tag'))
             .map(tag => tag.getAttribute('data-value').toLowerCase());
         const selectedUstensils = Array.from(document.querySelectorAll('#selected-ustensils-container .selected-tag'))
@@ -393,7 +414,6 @@ document.addEventListener("DOMContentLoaded", function () {
         function applyFilters() {
             arraySearch = [];
 
-            // Ajout de la recherche principale si plus de 2 caractères
             if (searchInput.value.length > 2) {
                 let searchValue = searchInput.value.toLowerCase();
                 arraySearch.push(["searchBar", searchValue]);
@@ -421,7 +441,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (selectedUstensils.length > 0) arraySearch.push(['ustensils', selectedUstensils]);
             if (selectedAppliance.length > 0) arraySearch.push(['appliance', selectedAppliance]);
 
-            filterArray(); // Appel de la fonction de filtrage
+            filterArray();
         }
 
         form.addEventListener('submit', function (event) {
@@ -440,7 +460,6 @@ document.addEventListener("DOMContentLoaded", function () {
             applyFilters: applyFilters
         };
     })();
-
 
     function filterArray() {
         let arraySearch = searchInstance.getArraySearch();
@@ -534,13 +553,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         displayRecipes(filteredRecipes);
-
-        // Met à jour les filtres disponibles
         const updatedFilters = getAllFiltersFromRecipes(filteredRecipes);
         displayFilters('ingredient', updatedFilters.ingredients);
         displayFilters('ustensils', updatedFilters.ustensils);
         displayFilters('appliance', updatedFilters.appliance);
     }
-
-
 });
