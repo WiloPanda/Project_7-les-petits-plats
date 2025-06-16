@@ -26,6 +26,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return Promise.resolve(recipes);
     }
 
+    /**
+     * Initialize the visual elements with the recipes data.
+     * @function [<initVisuel>]
+     * @param {object} data - Data of the recipes.
+     */
     function initVisuel(data) {
         displayRecipes(data);
         const availableFilters = getAllFiltersFromRecipes(data);
@@ -34,6 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
         displayFilters('appliance', availableFilters.appliance);
     }
 
+    /**
+     * Update the recipe counter based on the number of visible recipes.
+     * @function [<updateRecipeCounter>]
+     */
     function updateRecipeCounter() {
         const recipesSection = document.querySelector('.recipes-container');
         const recipeCards = recipesSection.querySelectorAll('.recipe-card');
@@ -43,8 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .length;
 
         const counterElement = document.querySelector('.recipe-counter');
-
-        // Convertir visibleCount en chaîne et ajouter un 0 devant si moins de 10
         const formattedCount = visibleCount.toString().padStart(2, '0');
 
         counterElement.textContent = `${formattedCount} recette${visibleCount > 1 ? 's' : ''}`;
@@ -68,6 +75,11 @@ document.addEventListener("DOMContentLoaded", function () {
         updateRecipeCounter();
     };
 
+    /**
+     * Get all filters from the recipes data.
+     * @function [<getAllFiltersFromRecipes>]
+     * @param {Objet} recipes - Recipes data
+     */
     function getAllFiltersFromRecipes(recipes) {
         const ingredientsSet = new Set();
         const ustensilsSet = new Set();
@@ -117,17 +129,14 @@ document.addEventListener("DOMContentLoaded", function () {
      * @param {HTMLElement} element - DOM element cliqued
      */
     function handleFilterSelection(filterType, selectedValue, element) {
-        // Ajouter une classe pour indiquer que l'élément est sélectionné
         element.classList.toggle('selected');
 
-        // Créer ou supprimer un tag sélectionné
         if (element.classList.contains('selected')) {
             createSelectedTag(filterType, selectedValue);
         } else {
             removeSelectedTag(filterType, selectedValue);
         }
-
-        // Appeler applyFilters pour mettre à jour la recherche
+        // call applyFilters to update the search results
         searchInstance.applyFilters();
     }
 
@@ -140,7 +149,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function createSelectedTag(filterType, value) {
         const container = document.querySelector(`#selected-${filterType}-container`);
 
-        // Check if the tag already exists
         if (container.querySelector(`[data-value="${value}"]`)) {
             return;
         }
@@ -154,7 +162,6 @@ document.addEventListener("DOMContentLoaded", function () {
             <img src="./assets/close_tag.svg" class="remove-tag" alt="Supprimer ${value}">
         `;
 
-        // Ajouter l'événement pour supprimer le tag
         const removeButton = tag.querySelector('.remove-tag');
         removeButton.addEventListener('click', () => {
             removeSelectedTag(filterType, value);
@@ -177,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
             tag.remove();
         }
 
-        // Retirer la classe selected du bouton correspondant
+        // remove the 'selected' class from the filter button
         const config = {
             ingredient: '#ingredients-list',
             ustensils: '#ustensiles-list',
@@ -192,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Appeler applyFilters pour mettre à jour la recherche
+        // call applyFilters to update the search results
         searchInstance.applyFilters();
     }
 
@@ -253,6 +260,10 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     })();
 
+    /**
+     * Get filtered recipes based on the search criteria.
+     * @function [<getFilteredRecipes>]
+     */
     function getFilteredRecipes() {
         const allFilters = searchInstance.getArraySearch();
         return recipes.filter(recipe => {
@@ -304,10 +315,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    /**
+     * Filter the recipes based on the selected tags and search input.
+     * @function [<filterArrayFilter>]
+     */
     function filterArrayFilter() {
         const filterSearch = searchFilterButton.getArraySearch();
 
-        // Récupère les recettes filtrées selon les tags actifs (mais sans la recherche principale)
         const selectedIngredients = Array.from(document.querySelectorAll('#selected-ingredient-container .selected-tag'))
             .map(tag => tag.getAttribute('data-value').toLowerCase());
         const selectedUstensils = Array.from(document.querySelectorAll('#selected-ustensils-container .selected-tag'))
@@ -315,7 +329,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const selectedAppliance = Array.from(document.querySelectorAll('#selected-appliance-container .selected-tag'))
             .map(tag => tag.getAttribute('data-value').toLowerCase());
 
-        //filter the recipes based on the selected tags
         let filteredRecipes = recipes.filter(recipe => {
             let matches = true;
 
@@ -386,4 +399,178 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-});
+    /**
+    * Search function to filter recipes based on user input.
+    * @function [<searchMain>]
+    */
+    const searchInstance = (function () {
+        let searchInput = document.querySelector('.search-input');
+        let form = document.querySelector('.search-form');
+        let arraySearch = [];
+
+        function applyFilters() {
+            arraySearch = []; // Initialize the arraySearch
+
+            // Add the value of the search input if it has more than 2 characters
+            if (searchInput.value.length > 2) {
+                let searchValue = searchInput.value.toLowerCase();
+                arraySearch.push(["searchBar", searchValue]);
+            }
+
+            const selectedIngredients = Array.from(document.querySelectorAll('#selected-ingredient-container .selected-tag'))
+                .map(tag => tag.getAttribute('data-value').toLowerCase());
+            const selectedUstensils = Array.from(document.querySelectorAll('#selected-ustensils-container .selected-tag'))
+                .map(tag => tag.getAttribute('data-value').toLowerCase());
+            const selectedAppliance = Array.from(document.querySelectorAll('#selected-appliance-container .selected-tag'))
+                .map(tag => tag.getAttribute('data-value').toLowerCase());
+
+            // Add filters if not empty
+            if (selectedIngredients.length > 0) {
+                arraySearch.push(['ingredients', selectedIngredients]);
+            }
+            if (selectedUstensils.length > 0) {
+                arraySearch.push(['ustensils', selectedUstensils]);
+            }
+            if (selectedAppliance.length > 0) {
+                arraySearch.push(['appliance', selectedAppliance]);
+            }
+
+            filterArray();
+        }
+
+        // Listener for form submission
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            applyFilters();
+        });
+
+        // Listener for input changes in the search bar
+        searchInput.addEventListener('input', () => {
+            applyFilters();
+        });
+
+        // Return the arraySearch and applyFilters function
+        return {
+            getArraySearch: function () {
+                return arraySearch;
+            },
+            applyFilters: applyFilters //Expose the applyFilters function
+        };
+    })();
+
+    /**
+     * Filter the recipes based on the search criteria.
+     * @function [<filterArray>]
+     */
+    function filterArray() {
+        let arraySearch = searchInstance.getArraySearch();
+        console.log(arraySearch);
+
+        // Initialize the array with all recipes 
+        let recipesToDisplay = recipes;
+
+        const filteredRecipes = recipesToDisplay.filter(recipe => {
+            let matchesAllCriteria = true;
+
+            // Browse through each filter type and its values
+            arraySearch.forEach(([filterType, filterValues]) => {
+                // If criteria is invalid
+                if (!matchesAllCriteria) return;
+
+
+                switch (filterType) {
+                    case 'searchBar':
+                        const mainInput = filterValues.toLowerCase();
+                        const regex = new RegExp(`${mainInput.trim()}`);
+                        let recipeIsMatching = false;
+
+                        // Recipe name matching
+                        if (regex.test(recipe.name.toLowerCase())) {
+                            recipeIsMatching = true;
+                        }
+
+                        // Use forEach to test each element
+                        recipe.ingredients.forEach(({ ingredient }) => {
+                            if (regex.test(ingredient.toLowerCase())) {
+                                recipeIsMatching = true;
+                            }
+                        });
+
+                        recipe.ustensils.forEach((ustensil) => {
+                            if (regex.test(ustensil.toLowerCase())) {
+                                recipeIsMatching = true;
+                            }
+                        });
+
+                        if (regex.test(recipe.appliance.toLowerCase())) {
+                            recipeIsMatching = true;
+                        }
+
+                        matchesAllCriteria = matchesAllCriteria && recipeIsMatching;
+                        break;
+
+                    case 'ingredients':
+                        // Map to extract all ingredients from the recipe
+                        const recipeIngredients = recipe.ingredients
+                            .map(ingredient => ingredient.ingredient.toLowerCase());
+
+                        // Reduce to check if all selected ingredients are present
+                        const allIngredientsFound = filterValues.reduce((allFound, selectedIngredient) => {
+                            // Filter to find matching ingredients
+                            const matchingIngredients = recipeIngredients.filter(recipeIngredient =>
+                                recipeIngredient.includes(selectedIngredient)
+                            );
+                            return allFound && matchingIngredients.length > 0;
+                        }, true);
+
+                        matchesAllCriteria = matchesAllCriteria && allIngredientsFound;
+                        break;
+
+                    case 'ustensils':
+                        // Map to extract all utensils from the recipe
+                        const recipeUstensils = recipe.ustensils.map(ustensil =>
+                            ustensil.toLowerCase()
+                        );
+
+                        // Reduce to check if all selected utensils are present
+                        const allUstensilsFound = filterValues.reduce((allFound, selectedUstensil) => {
+                            // Filter to find matching utensils
+                            const matchingUstensils = recipeUstensils.filter(recipeUstensil =>
+                                recipeUstensil.includes(selectedUstensil)
+                            );
+                            return allFound && matchingUstensils.length > 0;
+                        }, true);
+
+                        matchesAllCriteria = matchesAllCriteria && allUstensilsFound;
+                        break;
+
+                    case 'appliance':
+                        const recipeAppliance = recipe.appliance.toLowerCase();
+
+                        // Reduce to check if all selected appliances are present
+                        const allAppliancesFound = filterValues.reduce((allFound, selectedAppliance) => {
+                            return allFound && recipeAppliance.includes(selectedAppliance);
+                        }, true);
+
+                        matchesAllCriteria = matchesAllCriteria && allAppliancesFound;
+                        break;
+
+                    default:
+                        // If the filter type is not recognized, we skip it
+                        break;
+                }
+            });
+
+            return matchesAllCriteria;
+        });
+
+        displayRecipes(filteredRecipes);
+        //Mettre à jour les filtres disponibles selon les recettes filtrées
+        const updatedFilters = getAllFiltersFromRecipes(filteredRecipes);
+
+        displayFilters('ingredient', updatedFilters.ingredients);
+        displayFilters('ustensils', updatedFilters.ustensils);
+        displayFilters('appliance', updatedFilters.appliance);
+    }
+}
+);
