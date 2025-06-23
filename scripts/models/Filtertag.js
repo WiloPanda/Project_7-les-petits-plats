@@ -29,7 +29,7 @@ class Filtertag {
         const config = this.config[this.type];
         return this.items.map(item => {
             const li = document.createElement('li');
-            li.innerHTML = `<button class="${config.cssClass}">${item}</button>`;
+            li.innerHTML = `<button>${item}</button>`;
             return li;
         });
     }

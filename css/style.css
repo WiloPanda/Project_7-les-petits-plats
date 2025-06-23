@@ -227,6 +227,10 @@ button i {
     justify-content: space-between;
 }
 
+.selected-tag span::first-letter {
+    text-transform: uppercase;
+}
+
 /*** CARD RECIPES ***/
 .recipe-counter {
     font-size: 21px;
