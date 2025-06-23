@@ -5,16 +5,13 @@ class Recipe {
      * @param {Object} recipeData - Données de la recette
      */
     constructor(recipeData) {
-        const { id, image, name, servings, ingredients, time, description, appliance, ustensils } = recipeData;
+        const { id, image, name, ingredients, time, description } = recipeData;
         this.id = id;
         this.image = `assets/images_recipes/${image}`;
         this.name = name;
-        this.servings = servings;
         this.ingredients = ingredients;
         this.time = time;
         this.description = description;
-        this.appliance = appliance;
-        this.ustensils = ustensils;
     }
 
     /**
