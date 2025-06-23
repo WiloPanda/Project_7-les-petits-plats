@@ -26,7 +26,7 @@ class Filtertag {
      * @returns {HTMLElement[]} - Liste des éléments HTML créés
      */
     createFilterItems() {
-        const config = this.config[this.type];
+
         return this.items.map(item => {
             const li = document.createElement('li');
             li.innerHTML = `<button>${item}</button>`;
