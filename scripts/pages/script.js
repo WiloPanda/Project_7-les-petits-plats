@@ -1,6 +1,6 @@
 import recipes from '../../data/recipes.js';
 import Recipe from '../models/Recipe.js';
-import Filtertag from '../models/Filter.js';
+import Filtertag from '../models/Filtertag.js';
 import filterDropdown from '../utils/filter.js';
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const recipesData = await getData();
         initVisuel(recipesData);
         filterDropdown();
-
     }
 
     init();
@@ -163,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tag.setAttribute('data-type', filterType);
         tag.setAttribute('data-value', value);
         tag.innerHTML = `
-            ${value}
+            <span>${value}</span>
             <img src="./assets/close_tag.svg" class="remove-tag" alt="Supprimer ${value}">
         `;
 
