@@ -9,12 +9,9 @@ class Recipe {
         this.id = id;
         this.image = `assets/images_recipes/${image}`;
         this.name = name;
-
         this.ingredients = ingredients;
         this.time = time;
         this.description = description;
-        this.appliance = appliance;
-        this.ustensils = ustensils;
     }
 
     /**
